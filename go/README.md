@@ -10,7 +10,7 @@ AI coding tool it manages.
 
 Add it to brainrc's `packs.local.toml`, then run `brainrc apply`. Installing from a folder
 of a repo (`subdir`) needs a brainrc release that includes
-[#121](https://github.com/brainrc/brainrc/issues/121), the first after 0.8.31.
+[#121](https://github.com/brainrc/brainrc/issues/121) (0.8.32 or later).
 
 ```toml
 # packs.local.toml

@@ -32,7 +32,7 @@ subdir = "python"
 ```
 
 `subdir` needs a brainrc release that includes
-[brainrc/brainrc#121](https://github.com/brainrc/brainrc/issues/121), the first after 0.8.31. For
+[brainrc/brainrc#121](https://github.com/brainrc/brainrc/issues/121) (0.8.32 or later). For
 every agent in one repository, put the same keys under `[packs.python]` in its `brainrc.toml`.
 brainrc's lock records the folder and commit, so `brainrc install --frozen` gives every machine
 the same files.

@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: brainrc/brainrc/.github/actions/validate-pack@v0.8.31
+      - uses: brainrc/brainrc/.github/actions/validate-pack@v0.8.32
         with:
           path: ${{ matrix.pack }}
           default-packs: ${{ matrix.default-packs }}
