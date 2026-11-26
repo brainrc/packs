@@ -1,0 +1,13 @@
+#:schema https://raw.githubusercontent.com/brainrc/brainrc/main/docs/schemas/pack.toml.schema.json
+# brainrc/python, an official pack: Python: Ruff and pytest. See README.md.
+name = "python"
+prefix = "brainrc-"
+id = "brainrc/python"
+description = "Python: Ruff and pytest"
+requires_core = ">=0.8, <0.9"  # installing it from brainrc/packs needs `subdir` (#121)
+max_always_tokens = 200  # rules and descriptions every session loads
+test = "tests"  # tests that `brainrc validate --pack` runs
+
+[[extensions.gatework.domains]]  # a row for Gatework's Domains table
+files = "`*.py`, `pyproject.toml`"
+skills = ["brainrc-python"]
