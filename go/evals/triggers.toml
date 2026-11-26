@@ -1,0 +1,17 @@
+# Requests and the skills a model should load (expect) or must not load (forbid).
+# brainrc merges this file into `scripts/evals.py triggers` when the pack is enabled.
+
+[[case]]
+prompt = "Add a graceful shutdown to our Go HTTP server in cmd/api/main.go."
+expect = ["brainrc-go-service"]
+forbid = ["brainrc-db-migrations"]
+
+[[case]]
+prompt = "Add a migration that adds a non-null email column to the users table."
+expect = ["brainrc-db-migrations"]
+forbid = ["brainrc-go-service"]
+
+[[case]]
+prompt = "Fix the flaky Jest test in the web app."
+expect = []
+forbid = ["brainrc-go-service", "brainrc-db-migrations"]

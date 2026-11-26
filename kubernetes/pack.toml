@@ -1,0 +1,24 @@
+#:schema https://raw.githubusercontent.com/brainrc/brainrc/main/docs/schemas/pack.toml.schema.json
+# brainrc/kubernetes, an official pack: Kubernetes, GitOps and containers. See README.md.
+name = "kubernetes"
+prefix = "brainrc-"
+id = "brainrc/kubernetes"
+description = "Kubernetes, GitOps and containers"
+requires_core = ">=0.8, <0.9"  # installing it from brainrc/packs needs `subdir` (#121)
+max_always_tokens = 300  # rules and descriptions every session loads
+test = "tests"  # tests that `brainrc validate --pack` runs
+
+[[extensions.gatework.domains]]  # a row for Gatework's Domains table
+files = "k8s YAML, `Chart.yaml`, `values*.yaml`, `kustomization.yaml`"
+skills = ["brainrc-kubernetes"]
+reviewer = "brainrc-infra-reviewer"
+
+[[extensions.gatework.domains]]  # a row for Gatework's Domains table
+files = "Argo CD `Application*`, Flux `Kustomization`/`HelmRelease`, config repos"
+skills = ["brainrc-gitops", "brainrc-kubernetes"]
+reviewer = "brainrc-infra-reviewer"
+
+[[extensions.gatework.domains]]  # a row for Gatework's Domains table
+files = "`Dockerfile*`, `compose*.yaml`"
+skills = ["brainrc-containers"]
+reviewer = "brainrc-infra-reviewer"

@@ -1,0 +1,22 @@
+# Requests and the skills a model should load (expect) or must not load (forbid).
+# brainrc merges this file into `scripts/evals.py triggers` when the pack is enabled.
+
+[[case]]
+prompt = "Add a readiness probe and resource limits to the api Deployment in charts/api."
+expect = ["brainrc-kubernetes"]
+forbid = ["brainrc-containers"]
+
+[[case]]
+prompt = "Promote the new image tag to staging in our Argo CD config repo."
+expect = ["brainrc-gitops"]
+forbid = ["brainrc-terraform"]
+
+[[case]]
+prompt = "Make the Dockerfile run as a non-root user with a multi-stage build."
+expect = ["brainrc-containers"]
+forbid = ["brainrc-gitops"]
+
+[[case]]
+prompt = "Write a SQL query for last month's signups."
+expect = []
+forbid = ["brainrc-kubernetes", "brainrc-gitops", "brainrc-containers"]

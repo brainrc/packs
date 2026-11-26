@@ -1,0 +1,68 @@
+# Everyday agent actions and guarded ones. tests/test_baseline.py works out, for each, whether
+# Claude Code would prompt (ask), refuse (deny) or run it (allow), with brainrc core alone and with
+# this pack too, from core's guard hooks and the rules in overrides/claude/settings.fragment.json.
+# It's a static count under those rules, not a recorded session.
+
+# Everyday work: with core alone, the git commands run without a prompt (Claude Code's built-in
+# read-only set) and the rest prompt.
+[[action]]
+bash = "git status"
+[[action]]
+bash = "git diff --stat"
+[[action]]
+bash = "git log --oneline -5"
+[[action]]
+bash = "pytest -q"
+[[action]]
+bash = "npm test"
+[[action]]
+bash = "go test ./..."
+[[action]]
+bash = "cargo clippy --all-targets -- -D warnings"
+[[action]]
+bash = "ruff check ."
+[[action]]
+bash = "make build"
+[[action]]
+read = "src/app.py"
+[[action]]
+read = "README.md"
+
+# Secrets: core's guard asks; this pack refuses the Read tool outright.
+[[action]]
+read = ".env"
+[[action]]
+read = "services/api/.env.local"
+[[action]]
+read = "~/.aws/credentials"
+[[action]]
+read = "~/.ssh/id_ed25519"
+
+# Guarded: core's guard asks or denies, and must still (no new escapes).
+[[action]]
+bash = "git push origin main"
+guarded = true
+[[action]]
+bash = "git reset --hard HEAD~1"
+guarded = true
+[[action]]
+bash = "rm -rf build"
+guarded = true
+[[action]]
+bash = "terraform apply"
+guarded = true
+[[action]]
+bash = "kubectl delete namespace prod"
+guarded = true
+[[action]]
+bash = "gh pr create --fill"
+guarded = true
+[[action]]
+bash = "npm publish"
+guarded = true
+[[action]]
+bash = "cat ~/.aws/credentials"
+guarded = true
+[[action]]
+read = "~/.netrc"
+guarded = true

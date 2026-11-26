@@ -1,0 +1,17 @@
+# Requests and the skills a model should load (expect) or must not load (forbid).
+# brainrc merges this file into `scripts/evals.py triggers` when the pack is enabled.
+
+[[case]]
+prompt = "Add an S3 bucket with versioning to modules/storage/main.tf."
+expect = ["brainrc-terraform"]
+forbid = ["brainrc-kubernetes"]
+
+[[case]]
+prompt = "Tighten this IAM policy so the role can only read one bucket."
+expect = ["brainrc-aws"]
+forbid = ["brainrc-kubernetes"]
+
+[[case]]
+prompt = "Rename a variable in the Python CLI."
+expect = []
+forbid = ["brainrc-terraform", "brainrc-aws"]

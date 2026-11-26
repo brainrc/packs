@@ -1,0 +1,6 @@
+# What installing this pack lets an agent do, as brainrc.lock records it (#289): hooks, MCP
+# servers, tool grants and network domains. tests/test_pack.py checks it against the pack.
+hooks = []
+mcp = []
+tools = []
+domains = []
