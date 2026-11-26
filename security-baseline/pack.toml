@@ -1,0 +1,25 @@
+#:schema https://raw.githubusercontent.com/brainrc/brainrc/main/docs/schemas/pack.toml.schema.json
+# brainrc/security-baseline, an official pack: guard rules for credential files, secret protection and a sandbox profile. See README.md.
+name = "security-baseline"
+prefix = "brainrc-"
+id = "brainrc/security-baseline"
+description = "guard rules for credential files, secret protection and a sandbox profile"
+requires_core = ">=0.8, <0.9"  # installing it from brainrc/packs needs `subdir` (#121)
+max_always_tokens = 200  # rules and descriptions every session loads
+test = "tests"  # tests that `brainrc validate --pack` runs
+
+[[guard.deny]]
+path = "~/.aws/credentials"
+reason = "long-lived AWS access keys; use SSO or a profile the user runs commands with"
+
+[[guard.deny]]
+path = "~/.gnupg"
+reason = "GPG private keys"
+
+[[guard.deny]]
+path = "~/.pypirc"
+reason = "package index upload tokens"
+
+[[guard.deny]]
+path = "~/.config/gcloud/application_default_credentials.json"
+reason = "Google Cloud application default credentials"

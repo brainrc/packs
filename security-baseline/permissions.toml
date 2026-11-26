@@ -1,0 +1,16 @@
+# What installing this pack lets an agent do, as brainrc.lock records it (#289): hooks, MCP
+# servers, tool grants and network domains. tests/test_pack.py checks it against the pack.
+hooks = []
+mcp = []
+tools = [
+  "claude deny Read(**/.env)",
+  "claude deny Read(**/.env.*.local)",
+  "claude deny Read(**/.env.local)",
+  "claude deny Read(**/.env.production)",
+  "claude deny Read(~/.aws/credentials)",
+  "claude deny Read(~/.gnupg/**)",
+  "claude deny Read(~/.pypirc)",
+  "claude deny Read(~/.ssh/id_*)",
+  "claude sets sandbox = {\"autoAllowBashIfSandboxed\": true, \"enabled\": true}",
+]
+domains = []
