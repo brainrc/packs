@@ -1,0 +1,7 @@
+# Packs that reuse skill names Gatework still ships (brainrc/brainrc#318), so CI checks them
+# against brainrc core alone. Take a pack off once Gatework drops those names.
+starter
+review
+go
+terraform-aws
+kubernetes

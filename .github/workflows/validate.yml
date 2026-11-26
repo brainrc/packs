@@ -1,0 +1,47 @@
+# Checks every pack in this repo (each folder with a pack.toml) against the brainrc core this pins,
+# with brainrc's validate-pack action. A pack listed in .github/core-only is checked against core
+# alone; the rest are checked beside the default packs (Gatework) that core pins. Move the pin when
+# you test against a newer core.
+name: validate
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  packs:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.find.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: find
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib
+          only = pathlib.Path(".github/core-only")
+          core_only = {l.strip() for l in only.read_text().splitlines()
+                       if l.strip() and not l.startswith("#")} if only.is_file() else set()
+          packs = sorted(p.parent.name for p in pathlib.Path(".").glob("*/pack.toml"))
+          print("matrix=" + json.dumps([{"pack": p, "default-packs": "false" if p in core_only else "true"}
+                                        for p in packs]))
+          PY
+  validate:
+    needs: packs
+    if: needs.packs.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.packs.outputs.matrix) }}
+    name: ${{ matrix.pack }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: brainrc/brainrc/.github/actions/validate-pack@v0.8.31
+        with:
+          path: ${{ matrix.pack }}
+          default-packs: ${{ matrix.default-packs }}
