@@ -20,15 +20,7 @@ ref = "<a tag of brainrc/packs>"
 subdir = "node-ts"
 ```
 
-Gatework 0.8 still ships these skills under the same names (#318). Until it drops
-them, exclude its copies so the two packs don't collide:
-
-```toml
-# brainrc.local.toml
-exclude = [
-  "gatework:skills/brainrc-node-ts",
-]
-```
+It works beside Gatework, brainrc's default pack: none of its skills share a name with Gatework's.
 
 For every agent in one repository, put the same keys under `[packs.node-ts]` in that
 repository's `brainrc.toml`.

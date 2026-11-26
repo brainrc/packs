@@ -17,5 +17,8 @@ people's agents.
 - CI finds every folder with a `pack.toml`. List a pack in `.github/core-only` while it reuses
   names Gatework ships. A new pack also gets a row in brainrc's official table
   (brainrc/brainrc `docs/packs.md`, `OFFICIAL_PACK_IDS` in `brainrc/naming.py`).
+- A pack's ID is `brainrc/<folder>`: two parts, owner and pack, never the repo's name
+  (brainrc's naming rules refuse more). CI runs `validate-pack` at a pinned brainrc tag, so a new
+  pack fails there until a brainrc release lists its ID and the pin moves to that tag.
 - After a change, run `brainrc validate --pack <folder>` for each pack you touched; it runs the
   pack's tests too. Nothing here calls a model, in CI or in tests.
